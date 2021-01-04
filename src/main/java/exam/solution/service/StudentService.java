@@ -57,7 +57,7 @@ public class StudentService {
     public ResponseEntity<HttpStatus> deleteStudent(@PathVariable("studentId") int studentId) {
         try {
             studentRepo.deleteById(studentId);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

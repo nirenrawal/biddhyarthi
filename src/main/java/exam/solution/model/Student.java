@@ -1,9 +1,6 @@
 package exam.solution.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Student {
@@ -13,7 +10,8 @@ public class Student {
     private int supervisorId;
 
     @Id
-    @Column(name = "student_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "student_id", updatable = false, nullable = false)
     public int getStudentId() {
         return studentId;
     }
