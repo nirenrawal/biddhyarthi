@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,19 +19,19 @@ public class StudentService {
     StudentRepo studentRepo;
 
     public ResponseEntity<List<Student>> getAll() {
-//        try {
-//            List<Student> students = studentRepo.findAll();
-//            if (students.isEmpty()) {
-//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//            } else {
-//                return new ResponseEntity<>(students, HttpStatus.OK);
-//            }
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-        List<Student> students = new ArrayList<>();
-        students.addAll(studentRepo.findAll());
-        return new ResponseEntity<>(students, HttpStatus.OK);
+        try {
+            List<Student> students = studentRepo.findAll();
+            if (students.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            } else {
+                return new ResponseEntity<>(students, HttpStatus.OK);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+//        List<Student> students = new ArrayList<>();
+//        students.addAll(studentRepo.findAll());
+//        return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
 
