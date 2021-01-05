@@ -4,20 +4,20 @@ import javax.persistence.*;
 
 @Entity
 public class Student {
-    private int studentId;
+    private int id;
     private String fullName;
     private String email;
     private int supervisorId;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "student_id", updatable = false, nullable = false)
-    public int getStudentId() {
-        return studentId;
+    @Column(name = "id", updatable = false, nullable = false)
+    public int getId() {
+        return id;
     }
 
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Basic
@@ -57,7 +57,7 @@ public class Student {
 
         Student student = (Student) o;
 
-        if (studentId != student.studentId) return false;
+        if (id != student.id) return false;
         if (supervisorId != student.supervisorId) return false;
         if (fullName != null ? !fullName.equals(student.fullName) : student.fullName != null) return false;
         if (email != null ? !email.equals(student.email) : student.email != null) return false;
@@ -67,7 +67,7 @@ public class Student {
 
     @Override
     public int hashCode() {
-        int result = studentId;
+        int result = id;
         result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
         result = 31 * result + supervisorId;

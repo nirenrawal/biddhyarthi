@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,16 +20,19 @@ public class StudentService {
     StudentRepo studentRepo;
 
     public ResponseEntity<List<Student>> getAll() {
-        try {
-            List<Student> students = studentRepo.findAll();
-            if (students.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            } else {
-                return new ResponseEntity<>(students, HttpStatus.OK);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+//        try {
+//            List<Student> students = studentRepo.findAll();
+//            if (students.isEmpty()) {
+//                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//            } else {
+//                return new ResponseEntity<>(students, HttpStatus.OK);
+//            }
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+        List<Student> students = new ArrayList<>();
+        students.addAll(studentRepo.findAll());
+        return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
 
@@ -41,8 +45,8 @@ public class StudentService {
         }
     }
 
-    public ResponseEntity<Student> updateStudent(@PathVariable("studentId") int studentId, @RequestBody Student student) {
-        Optional<Student> studentData = studentRepo.findById(studentId);
+    public ResponseEntity<Student> updateStudent(@PathVariable("id") int id, @RequestBody Student student) {
+        Optional<Student> studentData = studentRepo.findById(id);
         if (studentData.isPresent()) {
             Student _student = studentData.get();
             _student.setFullName(student.getFullName());
@@ -54,9 +58,9 @@ public class StudentService {
         }
     }
 
-    public ResponseEntity<HttpStatus> deleteStudent(@PathVariable("studentId") int studentId) {
+    public ResponseEntity<HttpStatus> deleteStudent(@PathVariable("id") int id) {
         try {
-            studentRepo.deleteById(studentId);
+            studentRepo.deleteById(id);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class StudentController {
@@ -32,14 +32,14 @@ public class StudentController {
         return studentService.createNewStudent(student);
     }
 
-    @PutMapping("/students/{studentId}")
-    public ResponseEntity<Student> updateStudent(@PathVariable("studentId") int studentId, @RequestBody Student student){
-        return studentService.updateStudent(studentId, student);
+    @PutMapping("/students/{id}")
+    public ResponseEntity<Student> updateStudent(@PathVariable("id") int id, @RequestBody Student student){
+        return studentService.updateStudent(id, student);
     }
 
-    @DeleteMapping("/students/{studentId}")
-    public ResponseEntity<HttpStatus> deleteStudent(@PathVariable("studentId") int studentId){
-        return studentService.deleteStudent(studentId);
+    @DeleteMapping("/students/{id}")
+    public ResponseEntity<HttpStatus> deleteStudent(@PathVariable("id") int id){
+        return studentService.deleteStudent(id);
     }
 
 }
